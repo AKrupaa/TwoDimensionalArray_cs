@@ -14,7 +14,7 @@ namespace zadanie2
             // subscribe
             // I am creating a delegate (pointer) to HandleSomethingHappened
             // and adding it to myDelegate's list of "Event Handlers".
-            array.myDelegate += new Array.Delegate(array.HandleSomethingHappened);
+            array.MyDelegate += new Array.Delegate(array.HandleSomethingHappened);
 
             // zapisz w zakresie
             array[1, 1] = 11;
@@ -32,10 +32,10 @@ namespace zadanie2
             }
 
             // zapisz poza zakresem
-            array[2, 2] = 22;
+            array[7, 19] = 719;
 
             // wypisz dana liczbe (jeszcze kiedys poza zakresem)
-            Console.WriteLine(array[2, 2]);
+            Console.WriteLine(array[7, 19]);
             //brawo.
         }
     }

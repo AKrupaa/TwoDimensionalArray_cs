@@ -36,7 +36,6 @@ namespace zadanie2
             set;
         }
 
-        // event handler
-        //void ArrayChanged(int row, int column);
+        void HandleSomethingHappened();
     }
 }

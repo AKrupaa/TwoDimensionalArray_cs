@@ -13,9 +13,17 @@ void HandleSomethingHappened(string foo)
     //Do some stuff
 }
 
-//I am creating a delegate (pointer) to HandleSomethingHappened
-//and adding it to SomethingHappened's list of "Event Handlers".
-myObj.SomethingHappened += new MyEventHandler(HandleSomethingHappened);
 
 //To raise the event within a method.
 SomethingHappened("bar");
+
+// In this case we INVOKE the Delegate
+// it mean that he RISE a signal to others, that something happened
+if (SomethingHappened != null)
+	SomethingHappened("WRRRRR");
+
+
+//I am creating a delegate (pointer) to HandleSomethingHappened
+//and adding it to SomethingHappened's list of "Event Handlers".
+myObj.SomethingHappened += new MyEventHandler(myObj.HandleSomethingHappened);
+

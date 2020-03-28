@@ -17,6 +17,17 @@ namespace zadanie2
 
         string typeCastingSizeOfArray = "";
 
+
+        // https://www.youtube.com/watch?v=TdiN18PR4zk
+        // https://stackoverflow.com/questions/803242/understanding-events-and-event-handlers-in-c-sharp
+        // This delegate can be used to point to methods
+        // which return void and take no param.
+        public delegate void Delegate();
+
+        // This event can cause any method which conforms
+        // to Delegate to be called.
+        public event Delegate myDelegate;
+
         //Tablica posiada zdarzenie (event), które jest wywoływane w momencie jej rozszerzenia.
         //Argumentem jest aktualny rozmiar.
         public void HandleSomethingHappened()
@@ -84,6 +95,14 @@ namespace zadanie2
                     // zaaktualizuj rozmiary
                     rowLenght = rowExtended;
                     columnLenght = columnExtended;
+
+                    // In this case we INVOKE the Delegate
+                    // it mean that he RISE a signal to others, that something happened
+                    //if (myDelegate != null)
+                    //    myDelegate();
+
+                    //krotszy zapis \/
+                    myDelegate?.Invoke();
 
                     // do odpowiedniej komorki array (rozszerzonej, oryginalnej) wpisz wartosc pobraną
                     // instrukcja dla -> nie jest przekroczony :)

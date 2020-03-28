@@ -1,0 +1,5 @@
+/build
+/.vs
+/zadanie2/zadanie2/bin
+/zadanie2/zadanie2/obj
+*.exe

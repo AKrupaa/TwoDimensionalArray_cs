@@ -1,10 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 
 namespace zadanie2
 {
+    // POPRAWKA WNIESIONA @ 10-04
+    // zakomentowano starego delegata bez parametrów
+    // utworzono nowego, globalnego delegata z parametrami
+    // przypisanie do nowego delegata z parametrami metody statycznej w Program.cs
+    // metoda przypisana jest do eventu w Array.cs
+
+    // POPRAWKA WNIESIONA @ 10-04
+    //Tablica posiada zdarzenie (event), które jest wywoływane w momencie jej rozszerzenia.
+    //Argumentem jest aktualny rozmiar.
+    public delegate void DelegateWithParams(int actualRowLenght, int actualColumnLenght);
+
     //Napisać klasę implementującą tablicę dwuwymiarową do przechowywania liczb typu int.
     class Array : ITwoDimensionalArray
     {
@@ -15,27 +23,22 @@ namespace zadanie2
         private int[,] array;
         private const int defaultCapacity = 2;
 
-        // string showing actual size of array
-        private string typeCastingSizeOfArray = "";
 
-
+        // POPRAWKA WNIESIONA @ 10-04
         // https://www.youtube.com/watch?v=TdiN18PR4zk
         // https://stackoverflow.com/questions/803242/understanding-events-and-event-handlers-in-c-sharp
         // This delegate can be used to point to methods
         // which return void and take no param.
-        public delegate void Delegate();
+        //public delegate void Delegate();
 
         // This event can cause any method which conforms
         // to Delegate to be called.
-        public event Delegate MyDelegate;
+        //public event Delegate MyDelegate;
 
+        // POPRAWKA WNIESIONA @ 10-04
         //Tablica posiada zdarzenie (event), które jest wywoływane w momencie jej rozszerzenia.
         //Argumentem jest aktualny rozmiar.
-        public void HandleSomethingHappened()
-        {
-            typeCastingSizeOfArray = "[" + rowLenght + "," + columnLenght + "]";
-            Console.WriteLine("Actual size: " + typeCastingSizeOfArray);
-        }
+        public event DelegateWithParams delegateWithParams;
 
         //W momencie utworzenia podawany jest rozmiar.
         //dodałem standardowy rozmiar, a co.
@@ -47,7 +50,7 @@ namespace zadanie2
         }
 
         //Tablica posiada indeksator do zapisu i odczytu.
-        public int this[int row, int column] 
+        public int this[int row, int column]
         {
             //- Przekroczenie rozmiaru podczas odczytu powoduje rzucenie wyjątku.
             get
@@ -57,11 +60,11 @@ namespace zadanie2
                     //rozmiar przekroczony -> rzuc wyjatek
                     throw new Exception("Index was outside the bounds of the array");
                 }
-                
+
                 // rozmiar nie jest przekroczony
                 return array[row, column];
             }
-            set 
+            set
             {
                 // Przekroczenie rozmiaru podczas zapisu powoduje rozszerzenie tablicy do żądanego rozmiaru.
                 Update(row, column, value);
@@ -100,17 +103,28 @@ namespace zadanie2
 
                 // przypisz do array (oryginal) rozszerzona tablice newArray (kopie)
                 array = newArray;
+
                 // zaaktualizuj rozmiary
                 rowLenght = rowExtended;
                 columnLenght = columnExtended;
 
-                // In this case we INVOKE the Delegate
-                // it mean that he RISE a signal to others, that something happened
+                // POPRAWKA WNIESIONA @ 10-04
+                //Tablica posiada zdarzenie (event), które jest wywoływane w momencie jej rozszerzenia.
+                //Argumentem jest aktualny rozmiar.
+                delegateWithParams?.Invoke(rowLenght, columnLenght);
+                // is equal to
+                //if (delegateWithParams != null)
+                //{
+                //    delegateWithParams(1, 2);
+                //}
+
+                // POPRAWKA WNIESIONA @ 10-04
+                ////In this case we INVOKE the Delegate
+                ////it mean that he RISE a signal to others, that something happened
                 //if (MyDelegate != null)
                 //    MyDelegate();
-
-                //krotszy zapis \/
-                MyDelegate?.Invoke();
+                ////krotszy zapis \/
+                //MyDelegate?.Invoke();
 
                 // do odpowiedniej komorki array (rozszerzonej, teraz: oryginalnej) wpisz wartosc pobraną
                 // instrukcja dla -> nie jest przekroczony :)

@@ -36,6 +36,7 @@ namespace zadanie2
             set;
         }
 
-        void HandleSomethingHappened();
+        // POPRAWKA WNIESIONA @ 10-04
+        //void HandleSomethingHappened();
     }
 }

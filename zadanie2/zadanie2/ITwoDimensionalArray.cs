@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-//Napisać klasę implementującą tablicę dwuwymiarową do przechowywania liczb typu int.
+﻿//Napisać klasę implementującą tablicę dwuwymiarową do przechowywania liczb typu int.
 
 //W momencie utworzenia podawany jest rozmiar.
 //Tablica posiada indeksator do zapisu i odczytu.

@@ -5,10 +5,10 @@ namespace zadanie2
     class Program
     {
         // POPRAWKA WNIESIONA @ 10-04
-        // zakomentowano starego delegata bez parametrów
-        // utworzono nowego, globalnego delegata z parametrami
-        // przypisanie do nowego delegata z parametrami metody statycznej w Program.cs
-        // metoda przypisana jest do eventu w Array.cs
+        // Zgodnie z poleceniem:
+        // - usunąłem (zakomentowałem) starego delegata bez parametrów i wszystkie jego powiązania
+        // utworzyłem nowego, globalnego delegata z parametrami
+        // przypisałem do nowego delegata z parametrami metodę statyczną CallWhenChanged (Program.cs)
 
         public static void CallWhenChanged(int actualRowLenght, int actualColumnLenght)
         {
